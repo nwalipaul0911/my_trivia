@@ -1,0 +1,45 @@
+clea<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div class="game_body">
+    <div class="base_container">
+      <div class="dashboard hide">
+        <p class="score">Question : <span id="count">1</span></p>
+        <p class="score">Score : <span id="score"></span></p>
+        
+      </div>
+      <div class="welcome-container">
+        <h3 id="welcome">Welcome to Paul's trivia</h3>
+        <div class="play-container">
+          <button id="play">Play</button>
+        </div>
+        
+      </div>
+      <div class="question-container hide">
+        <p id="question" class="question"></p>
+      </div>
+      <div class="options-container hide">
+        <a type="button" class="options" id="option1" type="button" disabled></a>
+        <a type="button" class="options" id="option2" type="button"></a>
+        <a type="button" class="options" id="option3" type="button"></a>
+        <a type="button" class="options" id="option4" type="button"></a>
+        
+      </div>
+      <div class="next-container">
+        <a type="button" id="next">Next</a>
+        <a type="button" id="submit">Submit</a>
+        <p class="answer"></p>
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>
