@@ -70,11 +70,12 @@ next.addEventListener('click', ()=>{
     element.style.pointerEvents = 'all';
     element.classList.remove('pending', 'selected', 'success', 'failed')
   })
-  question()
+  
   var options_order = reorder() 
   options_position(options_order, options)
   options_container.style.display = 'none'
   setTimeout(()=>{
+    question()
     options_container.style.display = 'flex'
   }, 2000)
 })
