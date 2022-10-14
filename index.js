@@ -9,75 +9,77 @@ const submit = document.querySelector('#submit')
 const answer = document.querySelector('.answer')
 const options_container = document.querySelector('.options-container')
 
-
+var time = 60
 var score = 0
 var count = 1
 
 play.addEventListener('click', ()=>{
+  time = 61
+  score = 0
+  count = 1
   play.classList.add('hide')
   welcome.classList.add('hide')
   question()
   hide.forEach(element=>{
     element.classList.remove('hide');
   })
+  setInterval(()=>{
+    if(time==0){
+      time==61
+    }
+    else{
+      time--
+      document.querySelector('#time').innerHTML = `${time}`
+    }
+  }, 1000)
 })
 options.forEach(element=>{
   element.addEventListener('click', ()=>{
-    element.classList.add('pending', 'selected')
-    submit.style.display = 'block'
-    options.forEach(element=>{
-      if(element.classList.contains('selected')){
+    element.classList.add('pending')
+    options.forEach(item=>{
+      if(item.classList.contains('pending')){
         null
       }
       else{
-        element.style.pointerEvents = 'none'
+        item.style.pointerEvents = 'none'
       }
     })
+    setTimeout(()=>{
+      validator(options)
+    }, 1000)
+    setTimeout(()=>{
+      newQuestion(options)
+    }, 2000)
   })
 })
-// ===============submit button=================
-submit.addEventListener('click', ()=>{
-  setTimeout(()=>{
-    next.style.display = 'block'
-    submit.style.display = 'none'
-    options.forEach(element=>{
-      if(element.classList.contains('selected') && element.textContent == answer.textContent){
-        element.classList.remove('pending')
-        element.classList.add('success')
-        score++
-        document.querySelector('#score').innerHTML = `${score}`
-      }
-      else if (element.classList.contains('selected') && element.textContent != answer.textContent){
-        element.classList.remove('pending')
-        element.classList.add('failed')
-        options.forEach(element=>{
-          if(element.textContent == answer.textContent){
-            element.classList.add('success')
-          }
-        })
-      }
-    })
-  }, 1000)
-})
-
-
-// ==================next button================
-next.addEventListener('click', ()=>{ 
-  next.style.display = 'none';
+function validator(arg){
+  arg.forEach(element=>{
+    if(element.classList.contains('pending')&& element.textContent == answer.textContent){
+      element.classList.remove('pending');
+      element.classList.add('success')
+      score++
+      document.querySelector('#score').innerHTML = `${score}`
+    }
+    else if(element.textContent == answer.textContent){
+      element.classList.add('success')
+    }
+  })
+}
+function newQuestion(arg){
+  arg.forEach(element=>{
+    element.classList.remove('pending', 'success');
+    element.style.pointerEvents = 'all'
+  })
+  options_container.style.display = 'none'
+  let arr = reorder()
+  options_position(arr, arg)
+  question()
   count++
   document.querySelector('#count').innerHTML = `${count}`
-  options.forEach(element=>{
-    element.style.pointerEvents = 'all';
-    element.classList.remove('pending', 'selected', 'success', 'failed')
-  })
-  question()
-  var options_order = reorder() 
-  options_position(options_order, options)
-  options_container.style.display = 'none'
   setTimeout(()=>{
     options_container.style.display = 'flex'
-  }, 2000)
-})
+  },1000)
+}
 
 // =================options mapping=================
 const option_text = (arr1, arr2)=> arr1.map((a, b)=>{arr2[b].innerHTML = `${a}`}) 
@@ -105,5 +107,3 @@ function reorder(arr= [1,2,3,4]){
   const spliced = arr.splice(from,to)
   return arr.concat(spliced)
 } 
-
-

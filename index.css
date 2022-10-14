@@ -75,9 +75,6 @@ body{
 .success{
   background-color : rgb(29, 162, 29);
 }
-.failed{
-  background-color : rgb(192, 0, 0);
-}
 .pending{
   background-color : rgb(162, 153, 29);
 }
