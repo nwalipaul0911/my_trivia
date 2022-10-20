@@ -5,6 +5,11 @@
 .correct-answer{
   display:none;
 }
+.grid{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
 .question-container{
   display: grid;
   place-items: center;
