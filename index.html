@@ -20,23 +20,26 @@
   </head>
   <body class="bg-secondary">
     <div class="container grid">
-        <div class="card col-md-8 col-sm-10 p-3 shadow">
-          <div class="dashboard d-flex justify-content-between">
-            <p class="hide hidden text-secondary">Time : <span id="time"></span></p>
-            <p class="hide hidden text-secondary">Question : <span id="number"></span></p>
+        <div class="card col-md-8 col-sm-10 p-4 shadow">
+          <div class="row">
+            <div class="dashboard d-flex justify-content-between">
+              <p class="hide hidden text-secondary">Time : <span id="time"></span></p>
+              <p class="hide hidden text-secondary">Question : <span id="number"></span></p>
+            </div>
+            <div class="card col-12 question-container p-3">
+              <p class="question text-secondary hidden hide" id="question"></p>
+              <p class="correct-answer"></p>
+              <h2 class="question text-secondary" id="welcome">Welcome to Paul's Trivia</h2>
+            </div>
+            <div class="col-12 options-container mt-3">
+              <a class="options btn btn-outline-secondary hidden hide"></a>
+              <a class="options btn btn-outline-secondary hidden hide"></a>
+              <a class="options btn btn-outline-secondary hidden hide"></a>
+              <a class="options btn btn-outline-secondary hidden hide"></a>
+              <a class="start btn btn-outline-secondary" id="start">Play Now</a>
+            </div>
           </div>
-          <div class="card col-12 question-container p-4">
-            <p class="question text-secondary hidden hide" id="question"></p>
-            <p class="correct-answer"></p>
-            <h2 class="question text-secondary" id="welcome">Welcome to Paul's Trivia</h2>
-          </div>
-          <div class="col-12 options-container mt-3">
-            <a class="options btn btn-outline-secondary hidden hide"></a>
-            <a class="options btn btn-outline-secondary hidden hide"></a>
-            <a class="options btn btn-outline-secondary hidden hide"></a>
-            <a class="options btn btn-outline-secondary hidden hide"></a>
-            <a class="start btn btn-outline-secondary" id="start">Play Now</a>
-          </div>
+          
         </div>
     </div>
     
