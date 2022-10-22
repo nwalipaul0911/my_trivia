@@ -35,8 +35,8 @@
   border-radius: 5px;
 }
 .btn-custom:hover{
-  background-color: rgb(142, 142, 142);
-  color:white;
+  color:rgb(110, 110, 110);
+  cursor: pointer;
 }
 .hide{
   display:none;
