@@ -2,6 +2,7 @@
   padding: 0;
   margin:0;
 }
+
 .correct-answer{
   display:none;
 }
@@ -24,6 +25,18 @@
 .options{
   width:45%;
   margin-top: 5px;
+}
+.btn-custom{
+  border: 1px solid rgb(142, 142, 142);
+  text-align: center;
+  text-decoration: none;
+  color: rgb(110, 110, 110);
+  padding:8px 0;
+  border-radius: 5px;
+}
+.btn-custom:hover{
+  background-color: rgb(142, 142, 142);
+  color:white;
 }
 .hide{
   display:none;

@@ -7,8 +7,10 @@ const welcome = document.querySelector('#welcome')
 const num = document.querySelector('#number')
 const countdown_ = document.querySelector('#time')
 const answer_ = document.querySelector('.correct-answer')
-var time = 120
-var score = 0
+
+
+
+// ==============Start trivia ===============
 play.addEventListener('click', ()=>{
   play.classList.add('hide')
   welcome.classList.add('hide')
@@ -17,8 +19,10 @@ play.addEventListener('click', ()=>{
     item.classList.remove('hide')
   })
 })
-function endTrivia(score, index){
-  let end_score = Math.ceil((score/index)*100)
+
+// ===============End trivia =================
+function endTrivia(score, length){
+  let end_score = Math.floor((score/length)*100)
   play.innerHTML = 'Try Again'
   play.classList.remove('hide')
   welcome.innerHTML = `Score : ${end_score}%`
@@ -28,14 +32,19 @@ function endTrivia(score, index){
   })
 }
 
-// mappings 
+// ======================Option mappings =======================
 const options_map = (arr1, arr2)=>arr1.map((x, i)=>{arr2[i].innerHTML = `${x}`})
+
+
+// ==============Trivia async function ====================
 async function trivia(){
-  let score = 0
-  let count = 0
-  var timer = setInterval(countdown,1000)
   const api = await fetch(url)
   const data = await api.json()
+  let time = 180
+  let score = 0
+  let count = 0
+  var timer = null
+  startCountdown()
   num.innerHTML = `${count+1}/${data.length}`
   let question_ = data[count].question
   question.innerHTML = `${question_}`
@@ -48,13 +57,19 @@ async function trivia(){
     element.addEventListener('click', ()=>{
       if(element.textContent==answer_.textContent){
         score++
-        element.classList.replace('btn-outline-secondary', 'btn-success')
+        element.classList.add('btn')
+        element.classList.replace('btn-custom', 'btn-success')
+        
       }
       else{
-        element.classList.replace('btn-outline-secondary', 'btn-danger')
+        element.classList.add('btn')
+        element.classList.replace('btn-custom', 'btn-danger')
+        
         options.forEach(element=>{
           if(element.textContent==answer_.textContent){
-            element.classList.replace('btn-outline-secondary', 'btn-success')
+            element.classList.add('btn')
+            element.classList.replace('btn-custom', 'btn-success')
+            
           }
         })
       }
@@ -66,9 +81,10 @@ async function trivia(){
   })
   function nextQuestion(){
     options.forEach(element=>{
-      element.style.pointerEvents = 'all'
-      element.classList.replace('btn-success', 'btn-outline-secondary')
-      element.classList.replace('btn-danger', 'btn-outline-secondary')
+      element.style.pointerEvents = 'all';
+      element.classList.remove('btn')
+      element.classList.replace('btn-success', 'btn-custom')
+      element.classList.replace('btn-danger', 'btn-custom')
     })
     count++
     if(count<data.length){
@@ -83,23 +99,42 @@ async function trivia(){
     }
     else{
       endTrivia(score, data.length)
-      stopInterval()
-      
+      resetCountdown()
       
     }
   }
   function countdown(){
     time--
-    countdown_.innerHTML = `${time}`
+
+    let secs = time % 60;
+    let mins = Math.floor(time / 60);
+    if(secs<10) secs = '0'+ secs;
+    if(mins<10) mins = '0'+ mins;
+
+    countdown_.innerHTML = `${mins}:${secs}`
     if(time==0){
       endTrivia(score, data.length)
-      stopInterval()
+      resetCountdown()
+      
     }
   }
+  function startCountdown(){
+    if(timer){
+      return
+    }
+    timer = setInterval(countdown, 1000)
+  }
   
-  function stopInterval(){
+  function stopCoundown(){
     clearInterval(timer)
-    time=120
+    timer=null
+  }
+  function resetCountdown(){
+    stopCoundown();
+    time = 180;
+    countdown_.innerHTML = `00:00`
     count=0
+    num.innerHTML = `${count+1}/${data.length}`
+    score=0
   }
 } 
